@@ -5,32 +5,53 @@
 }
 
 body {
-  background-color: #111827;
+  background-color: #0A0E2A;
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  text-align: center;
+  padding: 2rem;
 }
 
 .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 3rem;
-  padding: 1rem;
+  gap: 2rem;
+  max-width: 900px;
+  width: 100%;
+}
+
+.top-logo {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+}
+
+.headline {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #E4F2FF;
+}
+
+.image-row {
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 3rem;
 }
 
 .main-image {
-  max-width: 500px;
+  max-width: 400px;
   width: 100%;
   height: auto;
 }
 
 .logo-image {
-  max-width: 250px;
+  max-width: 200px;
   width: 100%;
   height: auto;
 }
