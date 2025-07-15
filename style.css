@@ -108,7 +108,7 @@ background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
   content: "";
   left: 0;
   bottom: 0;
-   background: rgba(2,126,251,1);
+   background: rgba(0,172,238);
   transition: all 0.3s ease;
 }
 .btn-3 span:before {
