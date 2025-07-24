@@ -1,0 +1,1232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Teste do Sono - Cronotipo</title>
+        <link rel="stylesheet" href="css/cronotipo.min.css" >
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
+		<style>
+			/* 	Este style se encontra no arquivo do tema "page-cronotipo" */
+
+
+
+			.btn-cr, .btn-cr2 {
+				align-self: center;
+				width: 148px;
+				height: 48px;
+				font-family: "Open Sans",sans-serif;
+				font-size: 18px;
+				border-radius: 4px;
+				color: #fff;
+				background: #2baae1;
+				cursor: pointer;
+				outline: none;
+				transition: all .2s ease-out;
+				line-height: 2.7;
+				z-index: 1;
+			}
+			.btn-cr:hover, .btn-cr2:hover {
+				background: #4ac9ff;
+				box-shadow: 1px 3px 5px rgb(0 0 0 / 20%);
+			}
+			.slider-h4 {
+				color: #999;
+				font-weight: 500;
+			}
+			.slider-input[type=range] {
+				outline: 0;
+				border: 0;
+				border-radius: 500px;
+				width: 100%;
+				max-width: 100%;
+				margin: 24px 0 16px;
+				transition: box-shadow 0.2s ease-in-out;
+			}
+			.slider-time {
+				font-size: 75px;
+				font-weight: bold;
+			}
+			.slider-select {
+				width: 300px;
+				height: 0px;
+				opacity: 0;
+				max-height: 300px;
+				overflow-y: auto;
+				transition: .5s all;
+				position: absolute;
+				top: 0;
+				left: calc(50% - 142px);
+				background-color: white;
+				box-shadow: 0 0 7px #ccc;
+				border-radius: 6px;
+				z-index: 1;
+			}
+			.slider-select.active {
+				height: 300px;
+				opacity: 1;
+			}
+			.slider-item {
+				cursor: pointer;
+				padding: 5px;
+				font-size: 30px;
+				font-weight: bold;
+			}
+			.slider-item:hover {
+				background-color: lightgrey;
+			}
+
+			@media (max-width: 890px) {
+				.slider-select {
+					top: -185px;
+				}
+			}
+
+			@media screen and (-webkit-min-device-pixel-ratio: 0) {
+				.slider-input[type=range] {
+					overflow: hidden;
+					height: 40px;
+					-webkit-appearance: none;
+					background-color: #ddd;
+				}
+
+				.slider-input[type=range]::-moz-range-track, .slider-input[type=range]::-moz-range-progress {
+					opacity: 0;
+				}
+				.slider-input[type=range]::-moz-range-thumb {
+					width: 40px;
+					-webkit-appearance: none;
+					height: 40px;
+					cursor: pointer;
+					background: #fff;
+					box-shadow: inset 0 0 0 40px #1597ff;
+					border-radius: 50%;
+					-webkit-transition: box-shadow 0.2s ease-in-out;
+					transition: box-shadow 0.2s ease-in-out;
+					position: relative;
+					border: 0;
+				}
+
+				.slider-input[type=range]::-webkit-slider-runnable-track {
+					height: 40px;
+					-webkit-appearance: none;
+					color: #444;
+					-webkit-transition: box-shadow 0.2s ease-in-out;
+					transition: box-shadow 0.2s ease-in-out;
+				}
+				.slider-input[type=range]::-webkit-slider-thumb {
+					width: 40px;
+					-webkit-appearance: none;
+					height: 40px;
+					cursor: pointer;
+					background: #fff;
+					box-shadow: inset 0 0 0 40px #1597ff;
+					border-radius: 50%;
+					-webkit-transition: box-shadow 0.2s ease-in-out;
+					transition: box-shadow 0.2s ease-in-out;
+					position: relative;
+				}
+				.slider-input[type=range]:active::-webkit-slider-thumb {
+					background: #fff;
+					box-shadow: inset 0 0 0 3px #1597ff;
+				}
+			}
+			.slider-input[type=range]::-moz-range-progress {
+				background-color: #43e5f7;
+			}
+			.slider-input[type=range]::-moz-range-track {
+				background-color: #9a905d;
+			}
+			.slider-input[type=range]::-ms-fill-lower {
+				background-color: #43e5f7;
+			}
+			.slider-input[type=range]::-ms-fill-upper {
+				background-color: #9a905d;
+			}
+			.h4-container {
+				width: 100%;
+				max-width: 100%;
+				padding: 0 20px;
+				box-sizing: border-box;
+				position: relative;
+			}
+			.h4-container .h4-subcontainer {
+				width: 100%;
+				position: relative;
+			}
+			.h4-container .h4-subcontainer h4 {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: absolute;
+				top: 0;
+				width: 40px;
+				height: 40px;
+				color: #fff !important;
+				font-size: 12px;
+				transform-origin: center -10px;
+				transform: translateX(-50%);
+				transition: margin-top 0.15s ease-in-out, opacity 0.15s ease-in-out;
+			}
+			.h4-container .h4-subcontainer h4 span {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				background-color: #1597ff;
+				border-radius: 0 50% 50% 50%;
+				transform: rotate(45deg);
+				z-index: -1;
+			}
+			.slider-input:not(:active) + .h4-container h4 {
+				opacity: 0;
+				margin-top: -50px;
+				pointer-events: none;
+			}
+
+			.slider-input.input-two {
+				position: absolute;
+				width: 95%;
+				margin-top: 100px;
+			}
+			.rangeslider .slider-input.input-two:first-child::-webkit-slider-thumb {
+				z-index: 2;
+			}
+			.rangeslider .range_min, .rangeslider .range_max {
+				font-size: 50px;
+				font-weight: bold;
+				cursor: pointer;
+			}
+			.d-mozilla-block {
+				display: none;
+			}
+
+			/* Proof of concept for Firefox */
+			@-moz-document url-prefix() {
+				.rangeslider::before{
+					content:'';
+					width:100%;
+					height:40px;
+					display:block;
+					position: relative;
+					top:16px;
+				}
+
+				.rangeslider input[type='range']:nth-child(1){
+					position:absolute;
+					overflow:visible !important;
+					height:0;
+					z-index: 1;
+				}
+
+				.slider-input[type=range]:active::-moz-range-thumb {
+					background: #fff;
+					box-shadow: inset 0 0 0 3px #1597ff;
+				}
+
+				.rangeslider input[type='range']:nth-child(2){
+					position:absolute;
+					overflow:visible !important;
+					height:0;
+					z-index: 1;
+				}
+				.rangeslider input[type='range']::-moz-range-thumb {
+					position: relative;
+					margin-top: -7px;
+					z-index: 1;
+				}
+
+				.rangeslider input[type='range']:nth-child(1)::-moz-range-thumb {
+					transform: translateY(9px);    
+				}
+				.rangeslider input[type='range']:nth-child(2)::-moz-range-thumb {
+					transform: translateY(9px);    
+				}
+
+				.d-mozilla-block {
+					position: relative;
+					z-index: 0;
+					background: rgb(120, 195, 255);
+					width: 99.5%;
+					height: 40px;
+					border-radius: 500px;
+					display: block;
+				}
+			}
+		</style>
+    </head>
+    <body>
+        <div class="page cronotipo">
+
+            <header class="header-cronotipo">
+                <h1 class="logo-cronotipo"><a href="#">Teste de Cronotipo - Horne e Östberg</a></h1>
+            </header>
+
+            <section class="area-quiz initial-area bh-card-initial">
+
+
+                <div class="content-quiz initial-content-quiz">
+
+                    <h3 class="initial-title">Teste de Cronotipo - Horne e Östberg</h3>
+                    <h2 class="initial-description">O ciclo de vigília e sono de todas as pessoas dura cerca de 24h (ou seja, é um ciclo circadiano). Ainda assim, cada pessoa tem seus horários de preferências para dormir e acordar. O cronotipo é o nosso perfil de preferência circadiana. O teste definirá o seu cronotipo.</h2>
+
+                    
+                    <button class="btn-initial bh-initial">
+                        <span>Iniciar teste</span>
+                    </button>
+
+                </div>
+
+
+            </section>
+
+            <section class="area-quiz middle-area wait-card bh-card-middle">
+
+                <div class="content-quiz progress-space">
+
+                    <div class="progress-quiz">
+                        <b><i>1</i> de 19</b>
+                        <span></span>
+                    </div>
+
+
+                    <!-- Questão 1 -->
+                    <div class="options-quiz active" data-position="1">
+                        <h3 class="title-question-quiz">Questão 1</h3>
+                        <h2 class="question-quiz">Considerando apenas seu bem-estar pessoal e com liberdade total de planejar seu dia, <strong>a que horas você se levantaria?</strong></h2>
+						
+						<div style="text-align: center;margin-top: 70px;">
+							<div class="slider-time">05:00</div>
+
+							<div style="position: relative;">
+								<div class="slider-select"></div>
+							</div>
+
+							<input class="slider-input input-one" type="range" value="300" min="300" max="720" step="15">
+							<div class="h4-container"><div class="h4-subcontainer"><h4 class="slider-h4">0<span></span></h4></div></div>
+							
+							<div class="content-btn">
+								<div class="btn-cr" data-slider="1" data-hora="5">
+									Próxima
+								</div>
+							</div>
+						</div>
+
+						<div class="stripe-quiz" data-points="5" style="display: none;">
+							<span>A</span>
+							<h4>05:00 às 06:30</h4>
+						</div>
+						<div class="stripe-quiz" data-points="4" style="display: none;">
+							<span>B</span>
+							<h4>06:31 às 07:45</h4>
+						</div>
+						<div class="stripe-quiz" data-points="3" style="display: none;">
+							<span>C</span>
+							<h4>07:46 às 09:45</h4>
+						</div>
+						<div class="stripe-quiz" data-points="2" style="display: none;">
+							<span>D</span>
+							<h4>09:46 às 11:00</h4>
+						</div>
+						<div class="stripe-quiz" data-points="1" style="display: none;">
+							<span>E</span>
+							<h4>11:01 às 12:00</h4>
+						</div>
+                    </div>
+
+                    <!-- Questão 2 -->
+                    <div class="options-quiz" data-position="2">
+                        <h3 class="title-question-quiz">Questão 2</h3>
+                        <h2 class="question-quiz">Considerando apenas seu bem-estar pessoal e com liberdade total de planejar sua noite, <strong>a que horas você se deitaria?</strong></h2>
+						
+						<div style="text-align: center;margin-top: 70px;">
+							<div class="slider-time">20:00</div>
+							
+							<div style="position: relative;">
+								<div class="slider-select"></div>
+							</div>
+							
+							<input class="slider-input input-one" type="range" value="1200" min="1200" max="1620" step="15">
+							<div class="h4-container"><div class="h4-subcontainer"><h4 class="slider-h4">0<span></span></h4></div></div>
+							
+							<div class="content-btn">
+								<div class="btn-cr" data-slider="2" data-hora="20">
+									Próxima
+								</div>
+							</div>
+						</div>
+
+                        <div class="stripe-quiz" data-points="5" style="display: none;">
+                            <span>A</span>
+                            <h4>20:00 às 21:00</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="4" style="display: none;">
+                            <span>B</span>
+                            <h4>21:01 às 22:15</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="3" style="display: none;">
+                            <span>C</span>
+                            <h4>22:16 às 24:30</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="2" style="display: none;">
+                            <span>D</span>
+                            <h4>24:31 às 01:45</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="1" style="display: none;">
+                            <span>E</span>
+                            <h4>01:46 às 03:00</h4>
+                        </div>
+                    </div>
+
+                    <!-- Questão 3 -->
+                    <div class="options-quiz" data-position="3">
+                        <h3 class="title-question-quiz">Questão 3</h3>
+                        <h2 class="question-quiz">Até que ponto você depende do despertador<strong> para acordar de manhã?</strong></h2>
+
+                        <div class="stripe-quiz" data-points="4">
+                            <span>A</span>
+                            <h4>Nada dependente</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="3">
+                            <span>B</span>
+                            <h4>Não muito dependente</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="2">
+                            <span>C</span>
+                            <h4>Razoavelmente dependente</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="1">
+                            <span>D</span>
+                            <h4>Muito dependente</h4>
+                        </div>
+                    </div>
+
+                    <!-- Questão 4 -->
+                    <div class="options-quiz" data-position="4">
+                        <h3 class="title-question-quiz">Questão 4</h3>
+                        <h2 class="question-quiz">Você acha fácil<strong> acordar de manhã?</strong></h2>
+
+                        <div class="stripe-quiz" data-points="1">
+                            <span>A</span>
+                            <h4>Nada fácil</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="2">
+                            <span>B</span>
+                            <h4>Não muito fácil</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="3">
+                            <span>C</span>
+                            <h4>Razoavelmente fácil</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="4">
+                            <span>D</span>
+                            <h4>Muito fácil</h4>
+                        </div>
+                    </div>
+
+                    <!-- Questão 5 -->
+                    <div class="options-quiz" data-position="5">
+                        <h3 class="title-question-quiz">Questão 5</h3>
+                        <h2 class="question-quiz">Você se sente alerta durante a primeira meia hora<strong> depois de acordar?</strong></h2>
+
+                        <div class="stripe-quiz" data-points="1">
+                            <span>A</span>
+                            <h4>Nada alerta</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="2">
+                            <span>B</span>
+                            <h4>Não muito alerta</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="3">
+                            <span>C</span>
+                            <h4>Razoavelmente alerta</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="4">
+                            <span>D</span>
+                            <h4>Muito alerta</h4>
+                        </div>   
+                    </div>
+
+                    <!-- Questão 6 -->
+                    <div class="options-quiz" data-position="6">
+                        <h3 class="title-question-quiz">Questão 6</h3>
+                        <h2 class="question-quiz">Como é o seu apetite durante a primeira meia hora<strong> depois de acordar?</strong></h2>
+
+                        <div class="stripe-quiz" data-points="1">
+                            <span>A</span>
+                            <h4>Muito ruim</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="2">
+                            <span>B</span>
+                            <h4>Não muito ruim</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="3">
+                            <span>C</span>
+                            <h4>Razoavelmente bom</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="4">
+                            <span>D</span>
+                            <h4>Muito bom</h4>
+                        </div>  
+                    </div>
+
+                    <!-- Questão 7 -->
+                    <div class="options-quiz" data-position="7">
+                        <h3 class="title-question-quiz">Questão 7</h3>
+                        <h2 class="question-quiz">Durante a primeira meia hora depois de acordar<strong> você se sente cansado?</strong></h2>
+
+                        <div class="stripe-quiz" data-points="1">
+                            <span>A</span>
+                            <h4>Muito cansado</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="2">
+                            <span>B</span>
+                            <h4>Não muito cansado</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="3">
+                            <span>C</span>
+                            <h4>Razoavelmente em forma</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="4">
+                            <span>D</span>
+                            <h4>Em plena forma</h4>
+                        </div>
+                    </div>
+
+                    <!-- Questão 8 -->
+                    <div class="options-quiz" data-position="8">
+                        <h3 class="title-question-quiz">Questão 8</h3>
+                        <h2 class="question-quiz">Se você não tem compromisso no dia seguinte e comparando com sua hora habitual, <strong>a que horas você gostaria de ir deitar?</strong></h2>
+
+                        <div class="stripe-quiz" data-points="4">
+                            <span>A</span>
+                            <h4>Nunca mais tarde</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="3">
+                            <span>B</span>
+                            <h4>Menos que uma hora mais tarde</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="2">
+                            <span>C</span>
+                            <h4>Entre uma e duas horas mais tarde</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="1">
+                            <span>D</span>
+                            <h4>Mais do que duas horas mais tarde</h4>
+                        </div>
+                    </div>
+
+                    <!-- Questão 9 -->
+                    <div class="options-quiz" data-position="9">
+                        <h3 class="title-question-quiz">Questão 9</h3>
+                        <h2 class="question-quiz">Você decidiu fazer exercícios físicos. Um amigo sugeriu o horário das 07:00 às 08:00 horas da manhã, duas vezes por semana. Considerando apenas seu bem estar pessoal <strong> o que você acha de fazer exercícios nesse horário?</strong></h2>
+
+                        <div class="stripe-quiz" data-points="4">
+                            <span>A</span>
+                            <h4>Estaria em boa forma</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="3">
+                            <span>B</span>
+                            <h4>Estaria razoavelmente em forma</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="2">
+                            <span>C</span>
+                            <h4>Acharia isso difícil</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="1">
+                            <span>D</span>
+                            <h4>Acharia isso muito difícil</h4>
+                        </div>
+                    </div>
+
+                    <!-- Questão 10 -->
+                    <div class="options-quiz" data-position="10">
+                        <h3 class="title-question-quiz">Questão 10</h3>
+                        <h2 class="question-quiz">A que horas da noite você se sente <strong> cansado e com vontade de dormir?</strong></h2>
+
+						<div style="text-align: center;margin-top: 70px;">
+							<div class="slider-time">20:00</div>
+							
+							<div style="position: relative;">
+								<div class="slider-select"></div>
+							</div>
+
+							<input class="slider-input input-one" type="range" value="1200" min="1200" max="1620" step="15">
+							<div class="h4-container"><div class="h4-subcontainer"><h4 class="slider-h4">0<span></span></h4></div></div>
+							
+							<div class="content-btn">
+								<div class="btn-cr" data-slider="10" data-hora="20">
+									Próxima
+								</div>
+							</div>
+						</div>
+
+                        <div class="stripe-quiz" data-points="5" style="display: none;">
+                            <span>A</span>
+                            <h4>20:00 às 21:00</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="4" style="display: none;">
+                            <span>B</span>
+                            <h4>21:01 às 22:15</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="3" style="display: none;">
+                            <span>C</span>
+                            <h4>22:16 às 24:45</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="2" style="display: none;">
+                            <span>D</span>
+                            <h4>24:46 às 02:00</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="1" style="display: none;">
+                            <span>E</span>
+                            <h4>02:01 às 03:00</h4>
+                        </div>
+                    </div>
+
+                    <!-- Questão 11 -->
+                    <div class="options-quiz" data-position="11">
+                        <h3 class="title-question-quiz">Questão 11</h3>
+                        <h2 class="question-quiz">Você quer estar no máximo de sua forma para fazer um teste que dura duas horas e que sabe que é mentalmente cansativo. Considerando apenas o seu bem-estar pessoal, <strong>qual desses horários você escolheria para fazer esse teste?</strong></h2>
+
+
+						<div style="text-align: center;margin-top: 70px;display:none;">
+							<div class="slider-time">08:00</div>
+							
+							<div style="position: relative;">
+								<div class="slider-select"></div>
+							</div>
+							
+							<input class="slider-input input-one" type="range" value="480" min="480" max="1260" step="15">
+							<div class="h4-container"><div class="h4-subcontainer"><h4 class="slider-h4">08:00<span></span></h4></div></div>
+							
+							<div class="content-btn">
+								<div class="btn-cr" data-slider="11" data-hora="8">
+									Próxima
+								</div>
+							</div>
+						</div>
+
+                        <div class="stripe-quiz" data-points="6">
+                            <span>A</span>
+                            <h4>Das 08:00 às 10:00 horas</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="4">
+                            <span>B</span>
+                            <h4>Das 11:00 às 13:00 horas</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="2">
+                            <span>C</span>
+                            <h4>Das 15:00 às 17:00 horas</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="0">
+                            <span>D</span>
+                            <h4>Das 19:00 às 21:00 horas</h4>
+                        </div>
+                    </div>
+
+                    <!-- Questão 12 -->
+                    <div class="options-quiz" data-position="12">
+                        <h3 class="title-question-quiz">Questão 12</h3>
+                        <h2 class="question-quiz">Se você fosse deitar às 23:00 horas, <strong>em que nível de cansaço você se sentiria?</strong></h2>
+
+
+                        <div class="stripe-quiz" data-points="0">
+                            <span>A</span>
+                            <h4>Nada cansado</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="2">
+                            <span>B</span>
+                            <h4>Um pouco cansado</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="3">
+                            <span>C</span>
+                            <h4>Razoavelmente cansado</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="6">
+                            <span>D</span>
+                            <h4>Muito cansado</h4>
+                        </div>
+                    </div>
+
+                    <!-- Questão 13 -->
+                    <div class="options-quiz" data-position="13">
+                        <h3 class="title-question-quiz">Questão 13</h3>
+                        <h2 class="question-quiz">Por alguma razão você foi dormir várias horas mais tarde do que é seu constume. <strong>Se no dia seguinte você não tiver hora certa para acordar, o que aconteceria com você?</strong></h2>
+
+
+                        <div class="stripe-quiz" data-points="4">
+                            <span>A</span>
+                            <h4>Acordaria na hora normal, sem sono</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="3">
+                            <span>B</span>
+                            <h4>Acordaria na hora normal, com sono</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="2">
+                            <span>C</span>
+                            <h4>Acordaria na hora normal e dormiria novamente</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="0">
+                            <span>D</span>
+                            <h4>Acordaria mais tarde do que seu costume</h4>
+                        </div>
+                    </div>
+
+                    <!-- Questão 14 -->
+                    <div class="options-quiz" data-position="14">
+                        <h3 class="title-question-quiz">Questão 14</h3>
+                        <h2 class="question-quiz">Se você tiver que ficar acordado das 04:00 às 06:00 horas para realizar uma tarefa e não tiver compromissos no dia seguinte, <strong>o que faria?</strong></h2>
+
+
+                        <div class="stripe-quiz" data-points="1">
+                            <span>A</span>
+                            <h4>Só dormiria depois de fazer a tarefa</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="2">
+                            <span>B</span>
+                            <h4>Tiraria uma soneca antes da tarefa e dormiria depois</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="3">
+                            <span>C</span>
+                            <h4>Dormiria bastante antes e tiraria um soneca depois</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="4">
+                            <span>D</span>
+                            <h4>Só dormiria antes de fazer a tarefa</h4>
+                        </div>
+                    </div>
+
+                    <!-- Questão 15 -->
+                    <div class="options-quiz" data-position="15">
+                        <h3 class="title-question-quiz">Questão 15</h3>
+                        <h2 class="question-quiz">Se você tiver que fazer duas horas de exercícios físicos pesados e considerando apenas o seu bem-estar pessoal, <strong>qual destes horários você escolheria?</strong></h2>
+
+						<div style="text-align: center;margin-top: 70px; display: none;">
+							<div class="slider-time">08:00</div>
+							
+							<div style="position: relative;">
+								<div class="slider-select"></div>
+							</div>
+							
+							<input class="slider-input input-one" type="range" value="480" min="480" max="1260" step="15">
+							<div class="h4-container"><div class="h4-subcontainer"><h4 class="slider-h4">08:00<span></span></h4></div></div>
+							
+							<div class="content-btn">
+								<div class="btn-cr" data-slider="15" data-hora="8">
+									Próxima
+								</div>
+							</div>
+						</div>
+						
+                        <div class="stripe-quiz" data-points="4">
+                            <span>A</span>
+                            <h4>Das 08:00 às 10:00 horas</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="3">
+                            <span>B</span>
+                            <h4>Das 11:00 às 13:00 horas</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="2">
+                            <span>C</span>
+                            <h4>Das 15:00 às 17:00 horas</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="1">
+                            <span>D</span>
+                            <h4>Das 19:00 às 21:00 horas</h4>
+                        </div>
+                    </div>
+
+                    <!-- Questão 16 -->
+                    <div class="options-quiz" data-position="16">
+                        <h3 class="title-question-quiz">Questão 16</h3>
+                        <h2 class="question-quiz">Você decidiu fazer exercícios físicos. Um amigo sugeriu o horário das 22:00 às 23:00 horas, duas vezes por semana. <strong>Considerando apenas o seu bem-estar pessoal o que você acha de fazer exercícios nesse horário?</strong></h2>
+
+
+                        <div class="stripe-quiz" data-points="1">
+                            <span>A</span>
+                            <h4>Estaria em boa forma</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="2">
+                            <span>B</span>
+                            <h4>Estaria razoavelmente em forma</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="3">
+                            <span>C</span>
+                            <h4>Acharia isso difícil</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="4">
+                            <span>D</span>
+                            <h4>Acharia isso muito difícil</h4>
+                        </div>
+                    </div>
+
+                    <!-- Questão 17 -->
+                    <div class="options-quiz" data-position="17">
+                        <h3 class="title-question-quiz">Questão 17</h3>
+                        <h2 class="question-quiz">Suponha que você possa escolher o seu próprio horário de trabalho e que você deva trabalhar cinco horas seguidas por dia. Imagine que seja um serviço interessante e que você receba por produção. <strong>Qual horário você escolheria começar?</strong> (Marque a hora de início e a hora do fim).</h2>
+						
+						<div style="margin-top: 60px;">
+							<div class="rangeslider position-relative" style="height: 295px;">
+                                <input class="min slider-input input-two" name="range_1" type="range" step="15" min="0" max="1425" value="0" />
+                                <input class="max slider-input input-two" name="range_1" type="range" step="15" min="0" max="1425" value="1425" style="background: rgb(120 195 255);" />
+								<div>Início<span style="float:right;">Fim</span></div>
+                                <span class="range_min light left">0:00</span>
+                                <span class="range_max light right" style="float:right;">23:45</span>
+								<div class="d-mozilla-block"></div>
+                            </div>
+							
+							<div class="content-btn" style="text-align:center;">
+								<div class="btn-cr" data-slider="17" data-hora="0:00/23:45">
+									Próxima
+								</div>
+							</div>
+						</div>
+
+                        <div class="stripe-quiz" data-points="5" style="display:none;">
+                            <span>A</span>
+                            <h4>04:01 às 08:00h</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="4" style="display:none;">
+                            <span>B</span>
+                            <h4>08:01 às 09:30h</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="3" style="display:none;">
+                            <span>C</span>
+                            <h4>09:31 às 14:00h</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="2" style="display:none;">
+                            <span>D</span>
+                            <h4>14:01 às 17:00h</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="1" style="display:none;">
+                            <span>E</span>
+                            <h4>17:01 às 04:00h</h4>
+                        </div>
+                    </div>
+
+                     <!-- Questão 18 -->
+                     <div class="options-quiz" data-position="18">
+                        <h3 class="title-question-quiz">Questão 18</h3>
+                        <h2 class="question-quiz">A que hora do dia você atinge <strong>seu melhor momento de bem-estar?</strong></h2>
+
+						 <div style="text-align: center;margin-top: 70px;">
+							<div class="slider-time">00:00</div>
+							
+							<div style="position: relative;">
+								<div class="slider-select"></div>
+							</div>
+							
+							<input class="slider-input input-one" type="range" value="0" min="0" max="1425" step="15">
+							<div class="h4-container"><div class="h4-subcontainer"><h4 class="slider-h4">00:00<span></span></h4></div></div>
+							
+							<div class="content-btn">
+								<div class="btn-cr" data-slider="18" data-hora="0">
+									Próxima
+								</div>
+							</div>
+						</div>
+
+						<div class="stripe-quiz" data-points="1" style="display: none;">
+                            <span>E</span>
+                            <h4>22:01 às 05:00h</h4>
+                        </div>
+						<div class="stripe-quiz" data-points="5" style="display: none;">
+                            <span>A</span>
+                            <h4>05:01 às 08:00h</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="4" style="display: none;">
+                            <span>B</span>
+                            <h4>08:01 às 10:00h</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="3" style="display: none;">
+                            <span>C</span>
+                            <h4>10:01 às 17:00h</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="2" style="display: none;">
+                            <span>D</span>
+                            <h4>17:01 às 22:00h</h4>
+                        </div>
+                    </div>
+
+                    <!-- Questão 19 -->
+                    <div class="options-quiz" data-position="19">
+                        <h3 class="title-question-quiz">Questão 19</h3>
+                        <h2 class="question-quiz">Fala-se em pessoas matutinas e vespertinas (as primeiras gostam de acordar cedo e dormir cedo, as segundas de acordar tarde e dormir tarde). <strong>Com qual desses tipos você se identifica?</strong></h2>
+
+                        <div class="stripe-quiz" data-points="6">
+                            <span>A</span>
+                            <h4>Matutino</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="4">
+                            <span>B</span>
+                            <h4>Mais matutino que vespertino</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="2">
+                            <span>C</span>
+                            <h4>Mais verspertino que matutino</h4>
+                        </div>
+                        <div class="stripe-quiz" data-points="0">
+                            <span>D</span>
+                            <h4>Tipo vespertino</h4>
+                        </div>
+                        
+                    </div>
+
+                    <!-- Calculando resultado -->
+                    <div class="options-quiz" data-position="20">
+                        <h2 class="question-quiz">Calculando o resultado. Aguarde.</h2>
+                        
+                    </div>
+
+
+                    <div class="content-btn">
+                        <h3 class="result-points"></h3>
+                        <button class="btn-quiz btn-prev btn-quiz-prev">
+                            <span>Anterior</span>
+                        </button>
+
+                        <button class="btn-quiz btn-next">
+                            <span>Próxima</span>
+                        </button>
+
+                        <button class="btn-quiz btn-next btn-result">
+                            <span>Resultado</span>
+                        </button>
+
+                    </div>
+                    
+                </div>
+
+            </section>
+            
+            <section class="area-quiz middle-area bh-card-ultimate">
+                <div class="content-quiz initial-content-quiz">
+
+                    <div class="ultimate-result-test"></div>
+                    
+                    <div class="content-btn-result">
+                        <!-- <button class="btn-quiz share">
+                            <!-- <span>Compartilhar</span> -->
+                            <!-- <a href="http://www.facebook.com/sharer/sharer.php?title=Teste+de+Cronotipo&u=https://institutodosono.com/cronotipo" target="_blank"><span>Compartilhar</span></a> -->
+                        </button>
+                        <!-- <form action="https://institutodosono.com/teste-de-cronotipo"> -->
+                            <!-- <button class="btn-quiz refactory">
+                                <span>Refazer teste</span>
+                            </button> -->
+                        </form>
+                        <!-- <form action="https://institutodosono.com"> -->
+                            <!-- <button class="btn-quiz exit">
+                                <span>Ir para o site</span>
+                            </button> -->
+                        </form>
+                    </div>
+
+                    <div class="llll-result" style="display:none">
+                        <div class="matutino-extremo">
+                            <div>
+                                <h3 class="initial-title">Resultado</h3>
+                                <h2 class="title-result">Seu cronotipo é: <strong>Matutino extremo</strong></h2>
+                                <p><strong>Matutinos:</strong> São pessoas que preferem dormir e acordar mais cedo do que a média das outras pessoas; geralmente atingindo o pico de produtividade pela manhã. Estas pessoas costumar ter maior dificuldades para permanecerem acordadas até tarde, bem como para manter-se atentas e produtivas ao final da tarde e durante à noite. Podem ser classificados como matutinos moderados ou extremos.</p>
+                            </div>
+                        </div>
+
+                        <div class="moderadamente-matutino">
+                            <div>
+                                <h3 class="initial-title">Resultado</h3>
+                                <h2 class="title-result">Seu cronotipo é: <strong>Moderadamente matutino</strong></h2>
+                                <p><strong>Matutinos:</strong> São pessoas que preferem dormir e acordar mais cedo do que a média das outras pessoas; geralmente atingindo o pico de produtividade pela manhã. Estas pessoas costumar ter maior dificuldades para permanecerem acordadas até tarde, bem como para manter-se atentas e produtivas ao final da tarde e durante à noite. Podem ser classificados como matutinos moderados ou extremos.</p>
+                            </div>
+                        </div>
+
+                        <div class="indiferente">
+                            <div>
+                                <h3 class="initial-title">Resultado</h3>
+                                <h2 class="title-result">Seu cronotipo é: <strong>Indiferente</strong></h2>
+                                <p><strong>Indiferentes:</strong> São pessoas cujos horários de dormir e acordar coincidem com a média da população. Essas pessoas costumam tolerar com maior facilidade pequenas alterações de rotina e horários.</p>
+                            </div>
+                        </div>
+
+                        <div class="moderadamente-vespertino">
+                            <div>
+                                <h3 class="initial-title">Resultado</h3>
+                                <h2 class="title-result">Seu cronotipo é: <strong>Moderadamente Vespertino</strong></h2>
+                                <p><strong>Vespertino</strong> São pessoas que preferem dormir e acordar mais tarde do que a média das outras pessoas; geralmente atingindo o pico de produtividade no final da tarde ou início da noite. Essas pessoas costumam ter maior dificuldade para acordar cedo ou para trabalhar e estudar em horários pela manhã. Podem ser classificados como vespertinos moderados ou extremos.</p>
+                            </div>
+                        </div>
+
+                        <div class="vespertino-extremo">
+                            <div>
+                                <h3 class="initial-title">Resultado</h3>
+                                <h2 class="title-result">Seu cronotipo é: <strong>Vespertino Extremo</strong></h2>
+                                <p><strong>Vespertino</strong> São pessoas que preferem dormir e acordar mais tarde do que a média das outras pessoas; geralmente atingindo o pico de produtividade no final da tarde ou início da noite. Essas pessoas costumam ter maior dificuldade para acordar cedo ou para trabalhar e estudar em horários pela manhã. Podem ser classificados como vespertinos moderados ou extremos.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+        </div>
+        <script src="js/cronotipo.js"></script>
+		<script src="js/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript">
+			// este script se encontra no arquivo de modelo da página "page-cronotipo"
+			$(function() {
+				$('.slider-input.input-one').on('change input', function() {
+					var rangePercent = $(this).val();
+					var minutosIniciais = $(this).attr("min");
+					var horaEscolhida = parseInt((Number(rangePercent))/60);
+					var minutosEscolhidos = ((((Number(rangePercent))/60)-horaEscolhida)*60)/100;
+					var adicionaString = minutosEscolhidos==0.3 ? 0 : 1;
+
+					var horario = (horaEscolhida+minutosEscolhidos);
+					var horarioString = "";
+
+					if(horario<24) {
+						horarioString = horario.toString().replace(".",":");
+					} else if(horario>=34) {
+						horarioString = (horario-24).toString().replace(".",":");
+					} else {
+						horarioString = "0"+(horario-24).toString().replace(".",":");
+					}
+
+					horarioString = horarioString.split(":")[1]&&horarioString.split(":")[1].length<2 ? horarioString+"0" : horarioString;
+					horarioString = horarioString.split(":")[1]&&horarioString.split(":")[1].length>2 ? horarioString.split(":")[0]+":"+(parseInt(horarioString.split(":")[1].slice(0,2))+adicionaString).toString().slice(0,2) : horarioString;
+					horarioString = horarioString.indexOf(":")===-1 ? horarioString+":00" : horarioString;
+					horarioString = horario<10 ? "0"+horarioString : horarioString;
+
+					var porcentagem = (rangePercent-Number($(this).attr("min")))/Number(($(this).attr("max"))-Number($(this).attr("min")));
+
+					$(this).parent().find('.btn-cr').attr("data-hora", horario);
+					$(this).parent().find('h4').html(horarioString+'<span></span>');
+					$(this).parent().find('.slider-time').html(horarioString);
+					$(this).parent().find('h4').css({'transform': 'translateX(-50%)', 'left': porcentagem*100+'%'});
+				});
+
+				$('.slider-input.input-two').on('change input', function(){
+					var rangeGroup = $(this).attr('name'),
+						minBtn = $(this).parent().children('.min'),
+						maxBtn = $(this).parent().children('.max'),
+						range_min = $(this).parent().children('.range_min'),
+						range_max = $(this).parent().children('.range_max'),
+						minVal = parseInt($(minBtn).val()),
+						maxVal = parseInt($(maxBtn).val()),
+						origin = $(this).hasClass("min") ? "min" : "max";
+
+					if(origin === 'min' && minVal > maxVal-60){
+						$(minBtn).val(maxVal-60);
+					} else if(origin === 'max' && minVal > maxVal-60){
+						$(maxBtn).val(minVal+60);
+						return;
+					}
+
+					var limit = $(this).attr("max");
+					var p1 = ($(minBtn).val()/limit) * 100;
+					var p2 = ($(maxBtn).val()/limit) * 100;
+					p1 = p1<=40 ? p1+1 : p1;
+					p1 = p1>=60 ? p1-1 : p1;
+					p2 = p2<=40 ? p2+1 : p2;
+					p2 = p2>=60 ? p2-1 : p2;
+					var codigo = 'linear-gradient(90deg, rgba(221,221,221,1) '+p1+'%, rgb(120 195 255) '+p1+'%, rgb(120 195 255) '+p2+'%, rgba(221,221,221,1) '+p2+'%)';
+					maxBtn.css("background", codigo);
+					$(".d-mozilla-block").css("background", codigo);
+
+					var minVal = parseInt($(minBtn).val());
+					var getMin = (minVal/60).toString().split(".");
+					if(getMin&&getMin[1]) {
+						var minutos = (Number(getMin[1])*60)/100;
+						minutos = minutos.toString().length>1 ? minutos : minutos.toString()+"0";
+						getMin = getMin[0]+":"+minutos;
+					} else {
+						getMin = getMin[0]+":00";
+					}
+					$(range_min).html(getMin);
+
+
+					if(origin === 'max' && maxVal-5 < minVal){
+						$(maxBtn).val(5+ minVal);
+					}
+					var maxVal = parseInt($(maxBtn).val());
+					var getMax = (maxVal/60).toString().split(".");
+					if(getMax&&getMax[1]) {
+						var minutos2 = (Number(getMax[1])*60)/100;
+						minutos2 = minutos2.toString().length>1 ? minutos2 : minutos2.toString()+"0";
+						getMax = getMax[0]+":"+minutos2;
+					} else {
+						getMax = getMax[0]+":00";
+					}
+					$(range_max).html(getMax);
+
+					// Botão (inserir dados)
+					var btn_cr = $(this).parent().parent().children(".content-btn").children();
+					btn_cr.attr("data-hora", getMin+"/"+getMax);
+				});
+
+				$(".btn-cr").click(function() {
+					var questionario = $(this).attr("data-slider");
+					var horario = $(this).attr("data-hora");
+					var resposta = $('[data-position="'+questionario+'"]');
+
+					if(questionario==="1") {
+						if(horario<=6.5) {
+							resposta.find('[data-points="5"]').click();
+						} else if(horario<=7.75) {
+							resposta.find('[data-points="4"]').click();
+						} else if(horario<=9.75) {
+							resposta.find('[data-points="3"]').click();
+						} else if(horario<=11) {
+							resposta.find('[data-points="2"]').click();
+						} else {
+							resposta.find('[data-points="1"]').click();
+						}
+					} else if (questionario==="2") {
+						if(horario<=21) {
+							resposta.find('[data-points="5"]').click();
+						} else if(horario<=22.25) {
+							resposta.find('[data-points="4"]').click();
+						} else if(horario<=24.5) {
+							resposta.find('[data-points="3"]').click();
+						} else if(horario<=25.75) {
+							resposta.find('[data-points="2"]').click();
+						} else {
+							resposta.find('[data-points="1"]').click();
+						}
+					} else if (questionario==="10") {
+						if(horario<=21) {
+							resposta.find('[data-points="5"]').click();
+						} else if(horario<=22.25) {
+							resposta.find('[data-points="4"]').click();
+						} else if(horario<=24.75) {
+							resposta.find('[data-points="3"]').click();
+						} else if(horario<=26) {
+							resposta.find('[data-points="2"]').click();
+						} else {
+							resposta.find('[data-points="1"]').click();
+						}
+					} else if (questionario==="11") {
+						if(horario<=10.3) {
+							resposta.find('[data-points="6"]').click();
+						} else if(horario<=13.30) {
+							resposta.find('[data-points="4"]').click();
+						} else if(horario<=18) {
+							resposta.find('[data-points="2"]').click();
+						} else {
+							resposta.find('[data-points="0"]').click();
+						}
+					} else if (questionario==="15") {
+						if(horario<=10.3) {
+							resposta.find('[data-points="4"]').click();
+						} else if(horario<=13.30) {
+							resposta.find('[data-points="3"]').click();
+						} else if(horario<=18) {
+							resposta.find('[data-points="2"]').click();
+						} else {
+							resposta.find('[data-points="1"]').click();
+						}
+					} else if (questionario==="17") {
+						horario = horario.replace(/:/g,".").split("/");
+						var hrs = (Number(horario[0])+Number(horario[1]))/2;
+						var mins = hrs-parseInt(hrs);
+						if(mins!==0) {
+							mins = (mins*60)/100;
+						}
+						horario = parseInt(hrs) + mins;
+
+						if(horario>4 && horario<=8) {
+							resposta.find('[data-points="5"]').click();
+						} else if(horario<=9.3) {
+							resposta.find('[data-points="4"]').click();
+						} else if(horario<=14) {
+							resposta.find('[data-points="3"]').click();
+						} else if(horario<=17) {
+							resposta.find('[data-points="2"]').click();
+						} else {
+							resposta.find('[data-points="1"]').click();
+						}
+					} else if (questionario==="18") {
+						if(horario<=5 || horario>22) {
+							resposta.find('[data-points="1"]').click();
+						} else if(horario<=8) {
+							resposta.find('[data-points="5"]').click();
+						} else if(horario<=10) {
+							resposta.find('[data-points="4"]').click();
+						} else if(horario<=17) {
+							resposta.find('[data-points="3"]').click();
+						} else {
+							resposta.find('[data-points="2"]').click();
+						}
+					}
+				});
+
+				$('.slider-input.input-one').each(function() {
+					var min = Number($(this).attr("min"))/60;
+					var max = Number($(this).attr("max"))/60;
+					var sel = $(this).parent().find(".slider-select");
+					var num = $(this).parent().find(".slider-time");
+
+					if(sel.length > 0) {
+						while(min <= max) {
+							var valor = min<10 ? "0"+min : min;
+							var valorOriginal = valor;
+							valor = parseInt(valor)>=24 ? "0"+(parseInt(valor)-24) : valor;
+							if(min==max) {
+								sel.append("<div class='slider-item' data-o='"+valorOriginal+":00' onclick='slider_select(this)'>"+valor+":00</div>");
+							} else {
+								sel.append("<div class='slider-item' data-o='"+valorOriginal+":00' onclick='slider_select(this)'>"+valor+":00</div><div class='slider-item' data-o='"+valorOriginal+":15' onclick='slider_select(this)'>"+valor+":15</div><div class='slider-item' data-o='"+valorOriginal+":30' onclick='slider_select(this)'>"+valor+":30</div><div data-o='"+valorOriginal+":45' class='slider-item' onclick='slider_select(this)'>"+valor+":45</div>");
+							}
+							min++;
+						}
+						num.css("cursor","pointer");
+						num.click(function() {
+							sel.toggleClass("active");
+						});
+					}
+				});
+			});
+
+			function slider_select(element) {
+				var inp = $(element).parent().parent().parent().find(".slider-input");
+				var emMinutos = Number($(element).attr("data-o").split(":")[0])*60 + Number($(element).attr("data-o").split(":")[1]);
+				inp.val(emMinutos);
+				slider_change(inp);
+				$(element).parent().toggleClass("active");
+			}
+
+			function slider_change(that) {
+				var rangePercent = $(that).val();
+				var minutosIniciais = $(that).attr("min");
+				var horaEscolhida = parseInt((Number(rangePercent))/60);
+				var minutosEscolhidos = ((((Number(rangePercent))/60)-horaEscolhida)*60)/100;
+				var adicionaString = minutosEscolhidos==0.3 ? 0 : 1;
+
+				var horario = (horaEscolhida+minutosEscolhidos);
+				var horarioString = "";
+				if(horario<24) {
+					horarioString = horario.toString().replace(".",":");
+				} else if(horario>=34) {
+					horarioString = (horario-24).toString().replace(".",":");
+				} else {
+					horarioString = "0"+(horario-24).toString().replace(".",":");
+				}
+
+				horarioString = horarioString.split(":")[1]&&horarioString.split(":")[1].length<2 ? horarioString+"0" : horarioString;
+				horarioString = horarioString.split(":")[1]&&horarioString.split(":")[1].length>2 ? horarioString.split(":")[0]+":"+(parseInt(horarioString.split(":")[1].slice(0,2))+adicionaString).toString().slice(0,2) : horarioString;
+				horarioString = horarioString.indexOf(":")===-1 ? horarioString+":00" : horarioString;
+				horarioString = horario<10 ? "0"+horarioString : horarioString;
+
+				var porcentagem = (rangePercent-Number($(that).attr("min")))/Number(($(that).attr("max"))-Number($(that).attr("min")));
+
+				$(that).parent().find('.btn-cr').attr("data-hora", horario);
+				$(that).parent().find('h4').html(horarioString+'<span></span>');
+				$(that).parent().find('.slider-time').html(horarioString);
+				$(that).parent().find('h4').css({'transform': 'translateX(-50%)', 'left': porcentagem*100+'%'});
+			}
+		</script>
+    </body>
+</html>
+
+
