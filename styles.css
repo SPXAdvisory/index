@@ -198,3 +198,10 @@ input:focus, textarea:focus{ border-color: rgba(255,255,255,.22); box-shadow: 0 
 @media (prefers-reduced-motion: reduce){
   *{ animation: none !important; transition: none !important; }
 }
+
+
+.logo-hub {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 0rem;
+}
